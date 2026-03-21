@@ -11,9 +11,9 @@ func main() {
 	port := ":8080"
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /lengths", handler.LengthHandler)
-	mux.HandleFunc("GET /weights", handler.WeightHandler)
-	mux.HandleFunc("GET /temperatures", handler.TemperatureHanlder)
+	mux.HandleFunc("POST /lengths", handler.LengthHandler)
+	mux.HandleFunc("POST /weights", handler.WeightHandler)
+	mux.HandleFunc("POST /temperatures", handler.TemperatureHanlder)
 
 	svr := &http.Server{
 		Addr:    port,
