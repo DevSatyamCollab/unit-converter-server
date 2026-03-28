@@ -6,13 +6,7 @@ import (
 	"net/http"
 )
 
-type UserRequest struct {
-	Value    float32 `json:"value"`
-	FromUnit string  `json:"fromUnit"`
-	ToUnit   string  `json:"toUnit"`
-}
-
-type UserResponse struct {
+type Converter struct {
 	Value    float32 `json:"value"`
 	Ans      float32 `json:"ans"`
 	FromUnit string  `json:"fromUnit"`
@@ -30,7 +24,7 @@ func errorResponse(w http.ResponseWriter, status int, msg string) {
 }
 
 func response(w http.ResponseWriter, status int, payload interface{}) {
-	data, err := json.Marshal(&payload)
+	data, err := json.Marshal(payload)
 	if err != nil {
 		log.Printf("Error marshalling json: %s\n", err)
 		w.WriteHeader(500)

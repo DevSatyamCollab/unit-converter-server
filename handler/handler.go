@@ -8,7 +8,7 @@ import (
 
 func LengthHandler(w http.ResponseWriter, r *http.Request) {
 	// client Request
-	params := UserRequest{}
+	params := Converter{}
 	if err := json.NewDecoder(r.Body).Decode(&params); err != nil {
 		errorResponse(w, http.StatusBadRequest, "invalid payload Request")
 		return
@@ -18,17 +18,18 @@ func LengthHandler(w http.ResponseWriter, r *http.Request) {
 	ans := services.LengthConvert(params.Value, params.FromUnit, params.ToUnit)
 
 	// server response to client
-	response(w, http.StatusOK, UserResponse{
+	response(w, http.StatusOK, Converter{
 		Value:    params.Value,
 		FromUnit: params.FromUnit,
 		ToUnit:   params.ToUnit,
 		Ans:      ans,
 	})
+
 }
 
 func WeightHandler(w http.ResponseWriter, r *http.Request) {
 	// client Request
-	params := UserRequest{}
+	params := Converter{}
 	if err := json.NewDecoder(r.Body).Decode(&params); err != nil {
 		errorResponse(w, http.StatusBadRequest, "invalid payload Request")
 		return
@@ -38,17 +39,18 @@ func WeightHandler(w http.ResponseWriter, r *http.Request) {
 	ans := services.WeightConvert(params.Value, params.FromUnit, params.ToUnit)
 
 	// server response to client
-	response(w, http.StatusOK, UserResponse{
+	response(w, http.StatusOK, Converter{
 		Value:    params.Value,
 		FromUnit: params.FromUnit,
 		ToUnit:   params.ToUnit,
 		Ans:      ans,
 	})
+
 }
 
 func TemperatureHanlder(w http.ResponseWriter, r *http.Request) {
 	// client Request
-	params := UserRequest{}
+	params := Converter{}
 	if err := json.NewDecoder(r.Body).Decode(&params); err != nil {
 		errorResponse(w, http.StatusBadRequest, "invalid payload Request")
 		return
@@ -58,7 +60,7 @@ func TemperatureHanlder(w http.ResponseWriter, r *http.Request) {
 	ans := services.TemperatureConvert(params.Value, params.FromUnit, params.ToUnit)
 
 	// server response to client
-	response(w, http.StatusOK, UserResponse{
+	response(w, http.StatusOK, Converter{
 		Value:    params.Value,
 		FromUnit: params.FromUnit,
 		ToUnit:   params.ToUnit,
