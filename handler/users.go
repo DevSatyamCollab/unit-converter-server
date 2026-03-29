@@ -7,8 +7,8 @@ import (
 )
 
 type Converter struct {
-	Value    float32 `json:"value"`
-	Ans      float32 `json:"ans"`
+	Value    float64 `json:"value"`
+	Ans      float64 `json:"ans"`
 	FromUnit string  `json:"fromUnit"`
 	ToUnit   string  `json:"toUnit"`
 }

@@ -1,11 +1,11 @@
 package services
 
-func LengthConvert(value float32, fromUnit, toUnit string) float32 {
+func LengthConvert(value float64, fromUnit, toUnit string) float64 {
 	if fromUnit == toUnit {
 		return value
 	}
 
-	unitsToMeter := map[string]float32{
+	unitsToMeter := map[string]float64{
 		"mm":  0.001,
 		"cm":  0.01,
 		"m":   1,
@@ -19,12 +19,12 @@ func LengthConvert(value float32, fromUnit, toUnit string) float32 {
 	return (value * unitsToMeter[fromUnit]) / unitsToMeter[toUnit]
 }
 
-func WeightConvert(value float32, fromUnit, toUnit string) float32 {
+func WeightConvert(value float64, fromUnit, toUnit string) float64 {
 	if fromUnit == toUnit {
 		return value
 	}
 
-	unitsToGram := map[string]float32{
+	unitsToGram := map[string]float64{
 		"mg": 0.001,
 		"g":  1,
 		"kg": 1000,
@@ -35,7 +35,7 @@ func WeightConvert(value float32, fromUnit, toUnit string) float32 {
 	return (value * unitsToGram[fromUnit]) / unitsToGram[toUnit]
 }
 
-func TemperatureConvert(value float32, fromUnit, toUnit string) float32 {
+func TemperatureConvert(value float64, fromUnit, toUnit string) float64 {
 	if fromUnit == toUnit {
 		return value
 	}
