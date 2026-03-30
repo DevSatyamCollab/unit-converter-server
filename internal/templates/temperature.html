@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Conversion</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Temperature Conversion</h1>
+      <form method="POST">
+        <input
+          type="number"
+          name="temperatureValue"
+          placeholder="Enter value"
+          required
+        />
+        <select name="fromUnit">
+          <option value="C">Celsius</option>
+          <option value="F">Fahrenheit</option>
+          <option value="K">Kelvin</option>
+        </select>
+        <select name="toUnit">
+          <option value="C">Celsius</option>
+          <option value="F">Fahrenheit</option>
+          <option value="K">Kelvin</option>
+        </select>
+        <button type="submit">Convert</button>
+      </form>
+      {{if .Result}}
+      <div class="result">Result: {{.Result}} {{.ToUnit}}</div>
+      {{end}}
+    </div>
+  </body>
+</html>
