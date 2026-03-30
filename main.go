@@ -5,15 +5,24 @@ import (
 	"log"
 	"net/http"
 	"unit-converter/handler"
+	"unit-converter/internal/api"
 )
 
 func main() {
 	port := ":8080"
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /lengths", handler.LengthHandler)
-	mux.HandleFunc("POST /weights", handler.WeightHandler)
-	mux.HandleFunc("POST /temperatures", handler.TemperatureHanlder)
+
+	// web  handler
+	mux.HandleFunc("/", handler.IndexHandler)
+	mux.HandleFunc("/length", handler.LengthHandler)
+	mux.HandleFunc("/weight", handler.WeightHandler)
+	mux.HandleFunc("/temperature", handler.TemperatureHandler)
+
+	// api (third party)
+	mux.HandleFunc("POST /lengths", api.LengthHandler)
+	mux.HandleFunc("POST /weights", api.WeightHandler)
+	mux.HandleFunc("POST /temperatures", api.TemperatureHanlder)
 
 	svr := &http.Server{
 		Addr:    port,

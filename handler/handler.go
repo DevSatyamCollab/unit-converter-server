@@ -1,69 +1,73 @@
 package handler
 
 import (
-	"encoding/json"
 	"net/http"
-	"unit-converter/services"
+	"strconv"
+	"text/template"
+	"unit-converter/internal/services"
 )
 
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	temp := template.Must(template.ParseFiles("./internal/templates/index.html"))
+	temp.Execute(w, nil)
+}
+
 func LengthHandler(w http.ResponseWriter, r *http.Request) {
-	// client Request
-	params := Converter{}
-	if err := json.NewDecoder(r.Body).Decode(&params); err != nil {
-		errorResponse(w, http.StatusBadRequest, "invalid payload Request")
-		return
+	path := "./internal/templates/length.html"
+
+	if r.Method == http.MethodPost {
+		value, _ := strconv.ParseFloat(r.FormValue("lengthValue"), 64)
+		fromUnit := r.FormValue("fromUnit")
+		toUnit := r.FormValue("toUnit")
+
+		result := services.LengthConvert(value, fromUnit, toUnit)
+		tmpl := template.Must(template.ParseFiles(path))
+		tmpl.Execute(w, map[string]interface{}{
+			"Result": result,
+			"ToUnit": toUnit,
+		})
+	} else {
+		tmpl := template.Must(template.ParseFiles(path))
+		tmpl.Execute(w, nil)
 	}
-
-	// server work
-	ans := services.LengthConvert(params.Value, params.FromUnit, params.ToUnit)
-
-	// server response to client
-	response(w, http.StatusOK, Converter{
-		Value:    params.Value,
-		FromUnit: params.FromUnit,
-		ToUnit:   params.ToUnit,
-		Ans:      ans,
-	})
-
 }
 
 func WeightHandler(w http.ResponseWriter, r *http.Request) {
-	// client Request
-	params := Converter{}
-	if err := json.NewDecoder(r.Body).Decode(&params); err != nil {
-		errorResponse(w, http.StatusBadRequest, "invalid payload Request")
-		return
+	path := "./internal/templates/weight.html"
+
+	if r.Method == http.MethodPost {
+		value, _ := strconv.ParseFloat(r.FormValue("weightVlaue"), 64)
+		fromUnit := r.FormValue("fromUnit")
+		toUnit := r.FormValue("toUnit")
+
+		result := services.LengthConvert(value, fromUnit, toUnit)
+		tmpl := template.Must(template.ParseFiles(path))
+		tmpl.Execute(w, map[string]interface{}{
+			"Result": result,
+			"ToUnit": toUnit,
+		})
+	} else {
+		tmpl := template.Must(template.ParseFiles(path))
+		tmpl.Execute(w, nil)
 	}
-
-	// server work
-	ans := services.WeightConvert(params.Value, params.FromUnit, params.ToUnit)
-
-	// server response to client
-	response(w, http.StatusOK, Converter{
-		Value:    params.Value,
-		FromUnit: params.FromUnit,
-		ToUnit:   params.ToUnit,
-		Ans:      ans,
-	})
-
 }
 
-func TemperatureHanlder(w http.ResponseWriter, r *http.Request) {
-	// client Request
-	params := Converter{}
-	if err := json.NewDecoder(r.Body).Decode(&params); err != nil {
-		errorResponse(w, http.StatusBadRequest, "invalid payload Request")
-		return
+func TemperatureHandler(w http.ResponseWriter, r *http.Request) {
+	path := "./internal/templates/temperature.html"
+
+	if r.Method == http.MethodPost {
+		value, _ := strconv.ParseFloat(r.FormValue("temperatureValue"), 64)
+		fromUnit := r.FormValue("fromUnit")
+		toUnit := r.FormValue("toUnit")
+
+		result := services.LengthConvert(value, fromUnit, toUnit)
+		tmpl := template.Must(template.ParseFiles(path))
+		tmpl.Execute(w, map[string]interface{}{
+			"Result": result,
+			"ToUnit": toUnit,
+		})
+	} else {
+		tmpl := template.Must(template.ParseFiles(path))
+		tmpl.Execute(w, nil)
 	}
-
-	// server work
-	ans := services.TemperatureConvert(params.Value, params.FromUnit, params.ToUnit)
-
-	// server response to client
-	response(w, http.StatusOK, Converter{
-		Value:    params.Value,
-		FromUnit: params.FromUnit,
-		ToUnit:   params.ToUnit,
-		Ans:      ans,
-	})
 }
