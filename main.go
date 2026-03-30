@@ -18,7 +18,7 @@ func main() {
 	mux.HandleFunc("/length", handler.LengthHandler)
 	mux.HandleFunc("/weight", handler.WeightHandler)
 	mux.HandleFunc("/temperature", handler.TemperatureHandler)
-
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("internal/static"))))
 	// api (third party)
 	mux.HandleFunc("POST /lengths", api.LengthHandler)
 	mux.HandleFunc("POST /weights", api.WeightHandler)

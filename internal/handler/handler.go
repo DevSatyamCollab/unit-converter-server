@@ -36,11 +36,11 @@ func WeightHandler(w http.ResponseWriter, r *http.Request) {
 	path := "./internal/templates/weight.html"
 
 	if r.Method == http.MethodPost {
-		value, _ := strconv.ParseFloat(r.FormValue("weightVlaue"), 64)
+		value, _ := strconv.ParseFloat(r.FormValue("weightValue"), 64)
 		fromUnit := r.FormValue("fromUnit")
 		toUnit := r.FormValue("toUnit")
 
-		result := services.LengthConvert(value, fromUnit, toUnit)
+		result := services.WeightConvert(value, fromUnit, toUnit)
 		tmpl := template.Must(template.ParseFiles(path))
 		tmpl.Execute(w, map[string]interface{}{
 			"Result": result,
@@ -60,7 +60,7 @@ func TemperatureHandler(w http.ResponseWriter, r *http.Request) {
 		fromUnit := r.FormValue("fromUnit")
 		toUnit := r.FormValue("toUnit")
 
-		result := services.LengthConvert(value, fromUnit, toUnit)
+		result := services.TemperatureConvert(value, fromUnit, toUnit)
 		tmpl := template.Must(template.ParseFiles(path))
 		tmpl.Execute(w, map[string]interface{}{
 			"Result": result,
