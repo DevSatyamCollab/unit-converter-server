@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"unit-converter/handler"
 	"unit-converter/internal/api"
+	"unit-converter/internal/handler"
 )
 
 func main() {
